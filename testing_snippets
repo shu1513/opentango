@@ -1,0 +1,4 @@
+# Adding
+curl --header 'Content-Type: application/json' --request POST --data '{"name": "Javier Rodriguez", "price": 90, "location": "Buenos Aires", "availabilities": []}' http://localhost:5000/add_teacher
+# searching
+curl -X GET 'http://127.0.0.1:5000/search'

@@ -24,12 +24,13 @@ teachers = [
     Teacher("Moira Castellano", "Paris", [Availability("2023-10-27T13:00:00", "2023-10-27T14:00:00")], 9.9),
 ]
 
-@app.route('/add_teacher')
+@app.route('/add_teacher', methods=["POST"])
 def add_teacher():
-    if request.method == "POST":
-        content = request.get_json()
-        availabilties = [Availability(each["start"],each["end"]) for each in content["availabilities"]]
-        teachers.append(Teacher(content["location"],availabilities,content["price"]))
+    content = request.get_json()
+    availabilities = [Availability(each["start"],each["end"]) for each in content["availabilities"]]
+    teachers.append(Teacher(content["name"],content["location"],availabilities,content["price"]))
+    return jsonify({"message": "Teacher added successfully"}), 201
+
 
 @app.route('/search')
 def search_by_location():
