@@ -15,15 +15,18 @@ class Availability:
 
 class User:
     def __init__(self, first_name, last_name, location):
+        if not first_name:
+            raise ValueError("Missing first name")
+        if not last_name:
+            raise ValueError("Missing last name")
         self.first_name = first_name
         self.last_name = last_name
         self.location = location
 
 
-class Teacher:
-    def __init__(self, name, location, availabilities, price):
-        self.name = name
-        self.location = location
+class Teacher(User):
+    def __init__(self, first_name, last_name, location, availabilities, price):
+        super().__init__()
         self.availabilities = availabilities
         self.price = price
 
