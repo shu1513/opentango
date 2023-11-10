@@ -1,7 +1,24 @@
 from flask import Flask,request
 from flask.json import jsonify
+from flask_talisman import Talisman
 
 app = Flask(__name__)
+
+from flask import Flask
+from flask_talisman import Talisman
+
+app = Flask(__name__)
+
+# Enable HSTS with a max-age of 31536000 seconds (1 year) and includeSubDomains
+csp = {
+    'default-src': '\'self\'',
+    'img-src': '*',
+    'style-src': ['\'self\'', 'https://stackpath.bootstrapcdn.com'],
+    'script-src': ['\'self\'', 'https://code.jquery.com'],
+}
+
+talisman = Talisman(app, content_security_policy=csp, force_https=True, max_age=31536000, preload=True)
+
 
 class Availability:
     def __init__(self, start, end):
